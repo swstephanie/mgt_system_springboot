@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.pojo.ClassInfo;
 import com.example.demo.pojo.Student;
 import com.example.demo.pojo.StudentRequest;
 import com.example.demo.service.Service;
@@ -37,10 +38,27 @@ public class  Controller  {
                                 @RequestParam(value="name") String name) {
         return service.pagination(page,size,name);
     }
+    //GET -- Only Name
+    @RequestMapping(value = "/studentName/{id}",method = RequestMethod.GET)
+    public String getOnlyNameById(@PathVariable(value ="id") int id) {
+        return service.getOnlyNameById(id);
+    }
     //POST -- create
     @RequestMapping(value = "/student", method = RequestMethod.POST)
     public String create(@RequestBody StudentRequest request){
         service.create(request);
+        return "success";
+    }
+    //POST
+    @RequestMapping(value = "/student/register", method = RequestMethod.POST)
+    public String register(@RequestParam(value = "id") Integer id,@RequestBody List<Integer> classIdList) {
+        service.registerClass(id,classIdList);
+        return "success";
+    }
+
+    @RequestMapping(value = "/student/drop", method = RequestMethod.PUT)
+    public String dropClass(@RequestParam(value = "id") int id, @RequestBody List<Integer> classIdList) {
+        service.dropClass(id,classIdList);
         return "success";
     }
 
@@ -54,6 +72,8 @@ public class  Controller  {
         service.deleteById(id);
         return "success";
     }
+
+
 
 
 }

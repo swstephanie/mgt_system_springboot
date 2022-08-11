@@ -10,11 +10,13 @@ public interface ServiceInterface {
     void create(StudentRequest request);
 
     void update(int id,String name);
-
+    void registerClass(Integer id, List<Integer> classIdList);
     Student getById(int id);
 
     List<Student> getAllByName(String name);
     List<Student> getAll();
+    String getOnlyNameById(Integer id);
+
 
     void deleteById(int id);
 }
